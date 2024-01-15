@@ -3,17 +3,20 @@
 ## Examples Using the cd Command:
 
 Files and Folders used:
-![Image](image1.jpg)
+
+![Image](image1.png)
 
 cd command with no argument:
 
 ```
-[user@sahara ~]$ pwd
+[user@sahara ~/lecture1]$ pwd
+/home/lecture1
+[user@sahara ~/lecture1]$ cd
+[user@sahara ~]$
+[user@sahara ~/lecture1]$ pwd
 /home
-[user@sahara ~]$ cd
 ```
-The working directory when run was home. The output did nothing as the cd command needs another directory or folder as an argument for the current directory to switch to the one stated in the argument. Therefore, running the cd command with no argument results in no change in the directory. 
-There is no error, as the default move when cd is used with no argument is to move it to the home directory. 
+The working directory when run was lecture1. The output returns an empty line. However, the current directory in the command prompt is reset to the root directory of home. This is not an error. 
 
 
 cd command with a path to a directory as an argument:
@@ -21,23 +24,23 @@ cd command with a path to a directory as an argument:
 ```
 [user@sahara ~]$ pwd
 /home
-[user@sahara ~]$ cd messages
-[user@sahara ~/lecture1/messages]$
+[user@sahara ~]$ cd /home/lecture1
+[user@sahara ~/lecture1]$ 
+[user@sahara ~/lecture1]$ pwd
+/home/lecture1
 ```
-The working directory when run was home. This output was given because the diretory was succesfully changed to the directory titled "messages." Because this was a valid directory the correct output was given with no error.
-The output is not an error. Messages directory was within the file system. 
+The working directory when run was home. When using the cd command on a path to a directory, it will change the current working directory to the listed directory in the argument. This is not an error.
 
 cd command with a path to file as the argument:
 
 ```
-[user@sahara ~/lecture1/messages]$ pwd
-/home/lecture1/messages
-[user@sahara ~/lecture1/messages]$ cd en-us.txt
-bash: cd: en-us.txt: Not a directory
+[user@sahara ~]$ pwd
+/home
+[user@sahara ~]$ cd /home/lecture1/Hello.java
+bash: cd: /home/lecture1/Hello.java: Not a directory
 ```
 
-The working directory when run was messages. This output was given because the argument passed through the cd command was a path to an individual file and not a directory. The cd command is meant to change directories and if its passed through a path for a file it will return an error for the output.
-The output was an error because a file was passed through the argument instead of a directory within the file system. Therefore, an error will be printed. 
+The working directory when run was home. When using the cd command with a path to a file, it outputs, “bash: cd: /home/lecture1/Hello.java: Not a directory”. This is an error because the cd command only works with a path to a folder or directory. Therefore, this output is an error.
 
 ## Examples Using the ls Command:
 
@@ -50,7 +53,7 @@ ls command with no argument:
 lecture1
 ```
 
-The working directory when run was home. This output was given because lecture1 is the folder within the home directory. Therefore, lecture1 is given as the output. This output is not an error. 
+The working directory when run was home. This output was given because lecture1 is the folder within the home directory. Therefore, lecture1 is given as the output. The ls command will print out the folders and file in the working directory. This output is not an error. 
 
 ls command with a path to directory as argument: 
 
@@ -68,11 +71,11 @@ ls command with a path to a file as the argument:
 ```
 [user@sahara ~]$ pwd
 /home
-[user@sahara ~]$ ls en-us.txt
-ls: cannot access 'en-us.txt': No such file or directory
+[user@sahara ~]$ ls /home/lecture1/Hello.java
+/home/lecture1/Hello.java
 ```
 
-The working directory when run was home. This output was given because this file does not exist within the home directory. There was no files in the home directory which is why the output is given as it is. This is an error as an output as this file does not exist within the home directory. 
+The working directory when run was home. When the argument is the path to the file, the output is the given path to the file. This is not an error.
 
 ## Examples Using the cat Command: 
 
@@ -93,24 +96,32 @@ cat command with a path to a directory as the argument:
 ```
 [user@sahara ~]$ pwd
 /home
-[user@sahara ~]$ cat lecture1
-cat: lecture1: Is a directory
-[user@sahara ~]$ 
+[user@sahara ~]$ cat /home/lecture1
+cat: /home/lecture1: Is a directory
 ```
 
-The working directory when run was home. The output was given as this error message because the cat command is designed to be used on individual files but not directories. As a result, the "Is a directory" error message is given as an output when the cat command is used on a directory. This is an error message given as an output because the cat command was used on a directory and not a file. 
+The working directory when run was home. When using the cat command with a path to a directory as an argument, it printed out “cat: /home/lecture1: Is a directory”. The terimnal will output that the path given will lead to a directory. This is not an error. 
 
 cat command with a path to a file as the argument:
 
 ```
-[user@sahara ~/lecture1/messages]$ pwd
-/home/lecture1/messages
-[user@sahara ~/lecture1/messages]$ cat en-us.txt es-mx.txt
-Hello World!
-¡Hola Mundo!
+[user@sahara ~]$ pwd
+/home
+[user@sahara ~]$ cat /home/lecture1/Hello.java
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+public class Hello {
+  public static void main(String[] args) throws IOException {
+    String content = Files.readString(Path.of(args[0]), StandardCharsets.UTF_8);    
+    System.out.println(content);
+  }
+}
 ```
 
-The working directory when run was messages. The output was given as it concatenated the 2 files given in the cat command's argument. The files en-us.txt and es-mx.txt contain "Hello World!" and "¡Hola Mundo!" which are then given as the output when the cat command uses these 2 files as arguments. There is no error message in this output. 
+The working directory when run was home. When using the cat command with a path to file as argument the terminal will output the contents of the file. This is not an error.
 
 
 
