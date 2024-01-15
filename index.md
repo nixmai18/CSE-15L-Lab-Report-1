@@ -1,6 +1,8 @@
-# CSE 15L LAB REPORT 1
+# CSE 15L LAB REPORT 1: Remote Access and FileSystem
 
 ## Examples Using the cd Command:
+
+Files and Folders used
 
 cd command with no argument:
 
