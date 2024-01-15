@@ -2,7 +2,8 @@
 
 ## Examples Using the cd Command:
 
-Files and Folders used
+Files and Folders used:
+![Image](image1.jpg)
 
 cd command with no argument:
 
